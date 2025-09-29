@@ -280,6 +280,9 @@ vercel --prod
 - Update connection string in environment variables
 - Configure network access and database users
 
+### Scalability Note
+This Task Management System can scale by adopting a microservices architecture, splitting modules such as auth, task processing, and notifications into independently deployable services. Frequently accessed data (e.g., user profiles, task lists, and permission checks) can be cached with Redis to reduce database load and improve response times. Containerization with Docker enables consistent builds, easier CI/CD pipelines, and reproducible deployments across environments. Horizontal scaling behind a load balancer (e.g., Nginx, AWS ALB) distributes traffic across multiple application instances to handle spikes in demand. For large-scale operations, centralized logging (e.g., ELK/EFK stacks) and monitoring/alerting (e.g., Prometheus + Grafana) provide visibility, faster incident response, and capacity planning. MongoDB sharding and indexing strategies should be applied as data volume and concurrency grow.
+
 ## 🤝 Contributing
 
 1. **Fork the repository**
