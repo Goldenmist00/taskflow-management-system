@@ -6,9 +6,9 @@ import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'TaskFlow - Task Management System',
+  description: 'A modern, full-stack task management application with role-based access control and real-time task management.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({
