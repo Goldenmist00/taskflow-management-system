@@ -163,7 +163,7 @@ PORT=5000
 
 ### Swagger / API Docs
 - **Local Development**: http://localhost:5000/api-docs
-- **Production**: https://taskflow-production.up.railway.app/api-docs *(Replace with your actual Railway URL)*
+- **Production**: https://taskflow-management-system.onrender.com/api-docs
 
 ### Exporting Swagger as Postman Collection
 1. **Access Swagger UI**: Visit `/api-docs` endpoint
@@ -277,57 +277,24 @@ task-management-system/
 ## 🚀 Deployment
 
 ### **Live Demo**
-- **Frontend**: [https://taskflow-frontend.vercel.app](https://taskflow-frontend.vercel.app) *(Replace with your actual Vercel URL)*
-- **Backend API**: [https://taskflow-production.up.railway.app](https://taskflow-production.up.railway.app) *(Replace with your actual Railway URL)*
-- **API Documentation**: [https://taskflow-production.up.railway.app/api-docs](https://taskflow-production.up.railway.app/api-docs) *(Replace with your actual Railway URL)*
+- **Frontend**: [https://taskflow-management-system-frontend.vercel.app](https://taskflow-management-system-frontend.vercel.app) *(Will be updated with actual Vercel URL)*
+- **Backend API**: [https://taskflow-management-system.onrender.com](https://taskflow-management-system.onrender.com)
+- **API Documentation**: [https://taskflow-management-system.onrender.com/api-docs](https://taskflow-management-system.onrender.com/api-docs)
 
-### **Backend Deployment (Railway)**
+### **Backend Deployment (Render)**
 
-#### Prerequisites
-- Railway CLI installed
-- Git repository initialized
-- MongoDB Atlas cluster ready
+#### Backend is deployed on Render
+- **Backend URL**: https://taskflow-management-system.onrender.com
+- **API Documentation**: https://taskflow-management-system.onrender.com/api-docs
+- **Health Check**: https://taskflow-management-system.onrender.com/api/v1/health
 
-#### Step 1: Install Railway CLI
+#### Test Backend Endpoints
 ```bash
-# Install Railway CLI
-npm install -g @railway/cli
-
-# Verify installation
-railway --version
-```
-
-#### Step 2: Deploy to Railway
-```bash
-# Navigate to backend directory
-cd backend
-
-# Login to Railway
-railway login
-
-# Initialize Railway project
-railway init
-
-# Set environment variables
-railway variables set MONGODB_URI="mongodb+srv://username:password@cluster.mongodb.net/taskflow"
-railway variables set JWT_SECRET="your-super-secret-jwt-key-min-32-chars"
-railway variables set ADMIN_SECRET="your-production-admin-secret"
-railway variables set NODE_ENV="production"
-
-# Deploy to Railway
-railway up
-
-# Get deployment status and URL
-railway status
-```
-
-#### Step 3: Test Backend Deployment
-```bash
-# Test health endpoint (replace with your Railway URL)
-curl https://taskflow-production.up.railway.app/api/v1/health
+# Test health endpoint
+curl https://taskflow-management-system.onrender.com/api/v1/health
 
 # Test Swagger docs
-# Visit: https://taskflow-production.up.railway.app/api-docs
+# Visit: https://taskflow-management-system.onrender.com/api-docs
 ```
 
 ### **Frontend Deployment (Vercel)**
@@ -335,7 +302,7 @@ curl https://taskflow-production.up.railway.app/api/v1/health
 #### Step 1: Update Environment Variables
 Update your local `.env.local`:
 ```env
-NEXT_PUBLIC_API_BASE_URL=https://taskflow-production.up.railway.app
+NEXT_PUBLIC_API_BASE_URL=https://taskflow-management-system.onrender.com
 ```
 
 #### Step 2: Deploy to Vercel
@@ -346,7 +313,7 @@ NEXT_PUBLIC_API_BASE_URL=https://taskflow-production.up.railway.app
 
 2. **Configure Environment Variables**:
    - In Vercel dashboard, go to Project Settings → Environment Variables
-   - Add: `NEXT_PUBLIC_API_BASE_URL` = `https://taskflow-production.up.railway.app`
+   - Add: `NEXT_PUBLIC_API_BASE_URL` = `https://taskflow-management-system.onrender.com`
 
 3. **Deploy**:
    - Vercel will automatically build and deploy
