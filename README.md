@@ -1,42 +1,42 @@
-# 📋 TaskFlow - Complete Task Management System
+# TaskFlow - Complete Task Management System
 
 A modern, full-stack task management application built with **Next.js**, **Express.js**, and **MongoDB**. Features role-based access control, real-time task management, and a beautiful admin dashboard.
 
 ![TaskFlow Banner](https://img.shields.io/badge/TaskFlow-Task%20Management%20System-blue?style=for-the-badge)
 
-## 🌟 Features
+## Features
 
-### 🔐 **Authentication & Authorization**
-- ✅ **User Registration & Login** with JWT authentication
-- ✅ **Role-Based Access Control** (Admin vs Regular Users)
-- ✅ **Admin Account Creation** with secure secret key
-- ✅ **Protected Routes** with automatic redirects
-- ✅ **Session Management** with localStorage
+### Authentication & Authorization
+- User Registration & Login with JWT authentication
+- Role-Based Access Control (Admin vs Regular Users)
+- Admin Account Creation with secure secret key
+- Protected Routes with automatic redirects
+- Session Management with localStorage
 
-### 📊 **Task Management**
-- ✅ **Complete CRUD Operations** (Create, Read, Update, Delete)
-- ✅ **Task Status Tracking** (Pending, In Progress, Completed)
-- ✅ **Priority Levels** (Low, Medium, High)
-- ✅ **Due Date Management** with overdue indicators
-- ✅ **Task Assignment** (Admin can assign to any user)
-- ✅ **Rich Task Details** with descriptions and metadata
+### Task Management
+- Complete CRUD Operations (Create, Read, Update, Delete)
+- Task Status Tracking (Pending, In Progress, Completed)
+- Priority Levels (Low, Medium, High)
+- Due Date Management with overdue indicators
+- Task Assignment (Admin can assign to any user)
+- Rich Task Details with descriptions and metadata
 
-### 👑 **Admin Dashboard**
-- ✅ **User-Grouped Task View** - Click users to see their tasks
-- ✅ **Task Statistics** per user (pending, completed, overdue)
-- ✅ **Global Task Management** - Edit/delete any task
-- ✅ **User Management** - View all registered users
-- ✅ **Task Assignment Control** - Assign tasks to specific users
+### Admin Dashboard
+- User-Grouped Task View - Click users to see their tasks
+- Task Statistics per user (pending, completed, overdue)
+- Global Task Management - Edit/delete any task
+- User Management - View all registered users
+- Task Assignment Control - Assign tasks to specific users
 
-### 🎨 **Modern UI/UX**
-- ✅ **Professional Design** with shadcn/ui components
-- ✅ **Responsive Layout** for all screen sizes
-- ✅ **Dark/Light Mode** support
-- ✅ **Toast Notifications** for user feedback
-- ✅ **Modal Confirmations** for destructive actions
-- ✅ **Loading States** and progress indicators
+### Modern UI/UX
+- Professional Design with shadcn/ui components
+- Responsive Layout for all screen sizes
+- Dark/Light Mode support
+- Toast Notifications for user feedback
+- Modal Confirmations for destructive actions
+- Loading States and progress indicators
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 ### **Frontend**
 - **Framework**: Next.js 14 with App Router
@@ -54,7 +54,7 @@ A modern, full-stack task management application built with **Next.js**, **Expre
 - **Documentation**: Swagger/OpenAPI 3.0
 - **Security**: CORS, input validation
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - **Node.js** (v18 or higher)
@@ -110,7 +110,7 @@ npm run dev
 - **Backend API**: http://localhost:5000
 - **API Documentation**: http://localhost:5000/api-docs
 
-## 📱 Usage Guide
+## Usage Guide
 
 ### **Getting Started**
 
@@ -136,7 +136,7 @@ npm run dev
    - View task statistics per user
    - Manage overdue tasks across the organization
 
-## 🔧 Configuration
+## Configuration
 
 ### **Environment Variables**
 
@@ -158,10 +158,15 @@ PORT=5000
 - **First Admin**: Use the `/admin-setup` page
 - **Security**: Update the admin secret in `backend/routes/auth.js`
 
-## 📚 API Documentation
+## API Documentation
 
-### **Interactive Documentation**
-Access the full API documentation at: `http://localhost:5000/api-docs`
+### Interactive Documentation
+Access the full API documentation locally at: `http://localhost:5000/api-docs`.
+
+### Exporting to Postman
+- In Swagger UI (`/api-docs`), use the Download/Export option (or open the raw OpenAPI JSON) to obtain the spec.
+- In Postman, click Import and select the OpenAPI JSON file to generate a collection for submission/testing.
+- For local development, export the JSON file and import it into Postman; for hosted backends, you can also import from a public URL.
 
 ### **Key Endpoints**
 
@@ -185,35 +190,35 @@ All protected endpoints require JWT token:
 Authorization: Bearer <your-jwt-token>
 ```
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 task-management-system/
-├── 📁 app/                          # Next.js app directory
-│   ├── 📄 layout.tsx               # Root layout
-│   ├── 📄 page.tsx                 # Landing page
-│   ├── 📁 login/                   # Login page
-│   ├── 📁 register/                # Registration page
-│   ├── 📁 admin-setup/             # Admin creation page
-│   └── 📁 dashboard/               # Main dashboard
-├── 📁 components/                   # React components
-│   ├── 📁 auth/                    # Authentication components
-│   ├── 📁 tasks/                   # Task management components
-│   ├── 📁 admin/                   # Admin-specific components
-│   └── 📁 ui/                      # shadcn/ui components
+├── app/                            # Next.js app directory
+│   ├── layout.tsx                  # Root layout
+│   ├── page.tsx                    # Landing page
+│   ├── login/                      # Login page
+│   ├── register/                   # Registration page
+│   ├── admin-setup/                # Admin creation page
+│   └── dashboard/                  # Main dashboard
+├── components/                     # React components
+│   ├── auth/                       # Authentication components
+│   ├── tasks/                      # Task management components
+│   ├── admin/                      # Admin-specific components
+│   └── ui/                         # shadcn/ui components
 ├── 📁 lib/                         # Utility libraries
 │   ├── 📄 api.ts                   # API client
 │   └── 📄 utils.ts                 # Helper functions
-├── 📁 backend/                     # Express.js backend
-│   ├── 📁 models/                  # MongoDB schemas
-│   ├── 📁 routes/                  # API routes
-│   ├── 📁 middleware/              # Custom middleware
-│   ├── 📄 server.js                # Express server
-│   └── 📄 API_DOCUMENTATION.md     # API docs
-├── 📄 package.json                 # Frontend dependencies
-├── 📄 tailwind.config.js           # Tailwind configuration
-├── 📄 tsconfig.json                # TypeScript configuration
-└── 📄 README.md                    # This file
+├── backend/                        # Express.js backend
+│   ├── models/                     # MongoDB schemas
+│   ├── routes/                     # API routes
+│   ├── middleware/                 # Custom middleware
+│   ├── server.js                   # Express server
+│   └── API_DOCUMENTATION.md        # API docs
+├── package.json                    # Frontend dependencies
+├── tailwind.config.js              # Tailwind configuration
+├── tsconfig.json                   # TypeScript configuration
+└── README.md                       # This file
 ```
 
 ## 🎯 User Roles & Permissions
