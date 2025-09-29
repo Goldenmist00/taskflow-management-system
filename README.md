@@ -276,8 +276,15 @@ task-management-system/
 
 ## 🚀 Deployment
 
+### **✅ Successfully Deployed**
+TaskFlow is now live and fully functional with the following architecture:
+- **Frontend**: Next.js deployed on Vercel
+- **Backend**: Express.js deployed on Render
+- **Database**: MongoDB Atlas (cloud)
+- **Authentication**: JWT-based with role management
+
 ### **Live Demo**
-- **Frontend**: [https://taskflow-management-system-frontend.vercel.app](https://taskflow-management-system-frontend.vercel.app) *(Will be updated with actual Vercel URL)*
+- **Frontend**: [https://taskflow-management-system.vercel.app](https://taskflow-management-system.vercel.app)
 - **Backend API**: [https://taskflow-management-system.onrender.com](https://taskflow-management-system.onrender.com)
 - **API Documentation**: [https://taskflow-management-system.onrender.com/api-docs](https://taskflow-management-system.onrender.com/api-docs)
 
@@ -400,15 +407,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Express.js** - Web framework for Node.js
 - **Lucide React** - Beautiful icons
 
-## 📞 Support
-
-For support, email support@taskflow.com or create an issue in the repository.
-
 ---
 
 <div align="center">
-
-**Built with ❤️ by [Your Name]**
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
