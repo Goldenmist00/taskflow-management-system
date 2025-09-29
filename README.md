@@ -154,19 +154,30 @@ PORT=5000
 ```
 
 ### **Admin Setup**
-- **Admin Secret Key**: `admin123` (change in production)
-- **First Admin**: Use the `/admin-setup` page
-- **Security**: Update the admin secret in `backend/routes/auth.js`
+- **Admin Secret Key**: `admin123` *(Demo purposes only - MUST be changed in production)*
+- **Production Security**: Set `ADMIN_SECRET` environment variable to a strong, unique value
+- **First Admin**: Use the `/admin-setup` page with your production admin secret
+- **Security**: The demo secret `admin123` should never be used in production environments
 
 ## API Documentation
 
-### Interactive Documentation
-Access the full API documentation locally at: `http://localhost:5000/api-docs`.
+### Swagger / API Docs
+- **Local Development**: http://localhost:5000/api-docs
+- **Production**: https://taskflow-production.up.railway.app/api-docs *(Replace with your actual Railway URL)*
 
-### Exporting to Postman
-- In Swagger UI (`/api-docs`), use the Download/Export option (or open the raw OpenAPI JSON) to obtain the spec.
-- In Postman, click Import and select the OpenAPI JSON file to generate a collection for submission/testing.
-- For local development, export the JSON file and import it into Postman; for hosted backends, you can also import from a public URL.
+### Exporting Swagger as Postman Collection
+1. **Access Swagger UI**: Visit `/api-docs` endpoint
+2. **Export OpenAPI Spec**: 
+   - Click the `/api-docs` link or visit `https://your-backend-url/api-docs`
+   - Copy the JSON from the raw OpenAPI spec (usually available at `/api-docs.json`)
+3. **Import to Postman**:
+   - Open Postman → Click "Import"
+   - Select "Raw text" and paste the OpenAPI JSON
+   - Or use "Link" and enter: `https://your-backend-url/api-docs.json`
+   - Postman will generate a complete collection with all endpoints
+4. **Configure Authentication**:
+   - In Postman collection, set up Bearer Token authentication
+   - Use the JWT token obtained from the login endpoint
 
 ### **Key Endpoints**
 
@@ -265,28 +276,141 @@ task-management-system/
 
 ## 🚀 Deployment
 
-### **Frontend (Vercel)**
-```bash
-# Build the application
-npm run build
+### **Live Demo**
+- **Frontend**: [https://taskflow-frontend.vercel.app](https://taskflow-frontend.vercel.app) *(Replace with your actual Vercel URL)*
+- **Backend API**: [https://taskflow-production.up.railway.app](https://taskflow-production.up.railway.app) *(Replace with your actual Railway URL)*
+- **API Documentation**: [https://taskflow-production.up.railway.app/api-docs](https://taskflow-production.up.railway.app/api-docs) *(Replace with your actual Railway URL)*
 
-# Deploy to Vercel
-vercel --prod
+### **Backend Deployment (Railway)**
+
+#### Prerequisites
+- Railway CLI installed
+- Git repository initialized
+- MongoDB Atlas cluster ready
+
+#### Step 1: Install Railway CLI
+```bash
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Verify installation
+railway --version
 ```
 
-### **Backend (Railway/Heroku)**
+#### Step 2: Deploy to Railway
 ```bash
+# Navigate to backend directory
+cd backend
+
+# Login to Railway
+railway login
+
+# Initialize Railway project
+railway init
+
 # Set environment variables
-# Deploy using your preferred platform
+railway variables set MONGODB_URI="mongodb+srv://username:password@cluster.mongodb.net/taskflow"
+railway variables set JWT_SECRET="your-super-secret-jwt-key-min-32-chars"
+railway variables set ADMIN_SECRET="your-production-admin-secret"
+railway variables set NODE_ENV="production"
+
+# Deploy to Railway
+railway up
+
+# Get deployment status and URL
+railway status
 ```
+
+#### Step 3: Test Backend Deployment
+```bash
+# Test health endpoint (replace with your Railway URL)
+curl https://taskflow-production.up.railway.app/api/v1/health
+
+# Test Swagger docs
+# Visit: https://taskflow-production.up.railway.app/api-docs
+```
+
+### **Frontend Deployment (Vercel)**
+
+#### Step 1: Update Environment Variables
+Update your local `.env.local`:
+```env
+NEXT_PUBLIC_API_BASE_URL=https://taskflow-production.up.railway.app
+```
+
+#### Step 2: Deploy to Vercel
+1. **Import GitHub Repository**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+
+2. **Configure Environment Variables**:
+   - In Vercel dashboard, go to Project Settings → Environment Variables
+   - Add: `NEXT_PUBLIC_API_BASE_URL` = `https://taskflow-production.up.railway.app`
+
+3. **Deploy**:
+   - Vercel will automatically build and deploy
+   - Get your deployment URL (e.g., `https://taskflow-frontend.vercel.app`)
+
+#### Step 3: Test Frontend Deployment
+1. **Registration Flow**: Create a new user account
+2. **Login Flow**: Sign in with created credentials
+3. **Task CRUD**: Create, edit, update, and delete tasks
+4. **Admin Setup**: Use `/admin-setup` with your production admin secret
+5. **Admin Dashboard**: Test user management and task assignment
 
 ### **Database (MongoDB Atlas)**
 - Create MongoDB Atlas cluster
-- Update connection string in environment variables
-- Configure network access and database users
+- Configure network access (allow all IPs: `0.0.0.0/0` for Heroku)
+- Create database user with read/write permissions
+- Update `MONGODB_URI` in Heroku config vars
 
-### Scalability Note
-This Task Management System can scale by adopting a microservices architecture, splitting modules such as auth, task processing, and notifications into independently deployable services. Frequently accessed data (e.g., user profiles, task lists, and permission checks) can be cached with Redis to reduce database load and improve response times. Containerization with Docker enables consistent builds, easier CI/CD pipelines, and reproducible deployments across environments. Horizontal scaling behind a load balancer (e.g., Nginx, AWS ALB) distributes traffic across multiple application instances to handle spikes in demand. For large-scale operations, centralized logging (e.g., ELK/EFK stacks) and monitoring/alerting (e.g., Prometheus + Grafana) provide visibility, faster incident response, and capacity planning. MongoDB sharding and indexing strategies should be applied as data volume and concurrency grow.
+## 🚀 Optional Enhancements
+
+### **Docker Setup**
+For containerized deployment, consider adding:
+```dockerfile
+# Dockerfile example for backend
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 5000
+CMD ["npm", "start"]
+```
+
+### **Redis Caching**
+Enhance performance with Redis caching for:
+- User session management
+- Frequently accessed task lists
+- API response caching
+- Real-time notifications
+
+```bash
+# Add Redis to your stack
+npm install redis
+# Implement caching middleware for task-related APIs
+```
+
+### **Automated Setup Scripts**
+Create npm scripts for easier development setup:
+```json
+{
+  "scripts": {
+    "setup": "npm install && cd backend && npm install",
+    "dev:all": "concurrently \"npm run dev\" \"cd backend && npm run dev\"",
+    "build:all": "npm run build && cd backend && npm install --production"
+  }
+}
+```
+
+### **Scalability Considerations**
+- **Microservices**: Split auth, tasks, and notifications into separate services
+- **Load Balancing**: Use Nginx or cloud load balancers for multiple instances
+- **Database Optimization**: Implement MongoDB indexing and sharding strategies
+- **Monitoring**: Add logging with Winston, monitoring with Prometheus/Grafana
+- **CI/CD**: Implement automated testing and deployment pipelines
 
 ## 🤝 Contributing
 

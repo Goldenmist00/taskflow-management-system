@@ -142,7 +142,16 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://localhost:3000',
+    process.env.FRONTEND_URL || 'https://taskflow-frontend.vercel.app',
+    /\.vercel\.app$/,
+    /\.railway\.app$/
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Swagger UI
