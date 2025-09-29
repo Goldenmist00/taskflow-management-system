@@ -147,8 +147,9 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
 
 #### Backend (`.env`)
 ```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/TaskManagementApp
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
+# Never commit real secrets. Use placeholders and keep .env out of Git
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
+JWT_SECRET=<generate-a-strong-random-secret>
 PORT=5000
 ```
 

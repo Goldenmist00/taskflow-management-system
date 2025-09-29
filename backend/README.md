@@ -11,9 +11,13 @@ Node.js/Express backend API for the task management application.
    ```
 
 2. **Environment variables:**
-   The `.env` file is already configured with your MongoDB connection string.
+   Create a `.env` file from the provided example and fill in your secrets.
+   ```bash
+   cp .env.example .env
+   ```
+   Add your values for `MONGODB_URI` and `JWT_SECRET`. Never commit real secrets.
    
-   **Important:** Change the JWT_SECRET in production!
+   **Important:** Use a strong random value for `JWT_SECRET` in production.
 
 3. **Start the server:**
    ```bash
