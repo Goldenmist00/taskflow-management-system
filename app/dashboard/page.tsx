@@ -37,48 +37,66 @@ export default function DashboardPage() {
 
   if (isAdmin) {
     return (
-      <div className="min-h-dvh bg-background">
+      <div className="min-h-dvh bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <Navbar />
         <main className="mx-auto max-w-7xl px-4 py-6">
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Manage users, tasks, and assignments</p>
+          {/* Admin Header */}
+          <div className="mb-8">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
+                  <p className="text-blue-100">Manage users, tasks, and assignments across your organization</p>
+                </div>
+                <div className="hidden md:block">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                    <Users className="h-8 w-8 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           
           <Tabs defaultValue="users" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="users" className="flex items-center gap-2">
+            <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg">
+              <TabsTrigger value="users" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 <Users className="h-4 w-4" />
                 Users & Tasks
               </TabsTrigger>
-              <TabsTrigger value="all-tasks" className="flex items-center gap-2">
+              <TabsTrigger value="all-tasks" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 <List className="h-4 w-4" />
                 All Tasks
               </TabsTrigger>
-              <TabsTrigger value="create" className="flex items-center gap-2">
+              <TabsTrigger value="create" className="flex items-center gap-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 <Plus className="h-4 w-4" />
                 Create Task
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="users" className="space-y-4">
-              <UserTaskView 
-                refreshSignal={refresh} 
-                onTaskChanged={() => setRefresh((n) => n + 1)} 
-              />
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+                <UserTaskView 
+                  refreshSignal={refresh} 
+                  onTaskChanged={() => setRefresh((n) => n + 1)} 
+                />
+              </div>
             </TabsContent>
 
             <TabsContent value="all-tasks" className="space-y-4">
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold text-foreground">All Tasks</h2>
-                <p className="text-sm text-muted-foreground">View and manage all tasks in the system</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+                <div className="mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">All Tasks</h2>
+                  <p className="text-gray-600">View and manage all tasks in the system</p>
+                </div>
+                <TaskList refreshSignal={refresh} />
               </div>
-              <TaskList refreshSignal={refresh} />
             </TabsContent>
 
             <TabsContent value="create" className="space-y-4">
               <div className="max-w-2xl">
-                <TaskCreateForm onCreated={() => setRefresh((n) => n + 1)} />
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+                  <TaskCreateForm onCreated={() => setRefresh((n) => n + 1)} />
+                </div>
               </div>
             </TabsContent>
           </Tabs>
@@ -88,25 +106,41 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-background">
+    <div className="min-h-dvh bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50">
       <Navbar />
       <main className="mx-auto max-w-7xl px-4 py-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground">Task Dashboard</h1>
-          <p className="text-muted-foreground">Manage your tasks and stay organized</p>
+        {/* User Header */}
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Task Dashboard</h1>
+                <p className="text-green-100">Manage your tasks and stay organized</p>
+              </div>
+              <div className="hidden md:block">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                  <List className="h-8 w-8 text-white" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-1">
-            <TaskCreateForm onCreated={() => setRefresh((n) => n + 1)} />
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+              <TaskCreateForm onCreated={() => setRefresh((n) => n + 1)} />
+            </div>
           </div>
           
           <div className="lg:col-span-2">
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold text-foreground">Your Tasks</h2>
-              <p className="text-sm text-muted-foreground">View and manage all your assigned tasks</p>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Tasks</h2>
+                <p className="text-gray-600">View and manage all your assigned tasks</p>
+              </div>
+              <TaskList refreshSignal={refresh} />
             </div>
-            <TaskList refreshSignal={refresh} />
           </div>
         </div>
       </main>
