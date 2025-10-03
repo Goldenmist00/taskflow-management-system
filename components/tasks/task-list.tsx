@@ -7,9 +7,10 @@ import TaskItem, { type Task } from "./task-item"
 
 type Props = {
   refreshSignal?: number
+  onTaskChanged?: () => void
 }
 
-export default function TaskList({ refreshSignal }: Props) {
+export default function TaskList({ refreshSignal, onTaskChanged }: Props) {
   const { toast } = useToast()
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(false)
@@ -48,7 +49,14 @@ export default function TaskList({ refreshSignal }: Props) {
   return (
     <div className="space-y-4">
       {tasks.map((t) => (
-        <TaskItem key={t._id} task={t} onChanged={load} />
+        <TaskItem 
+          key={t._id} 
+          task={t} 
+          onChanged={() => {
+            load()
+            onTaskChanged?.()
+          }} 
+        />
       ))}
     </div>
   )
